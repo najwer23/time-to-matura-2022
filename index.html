@@ -18,8 +18,12 @@
 
     <main>
         <section>
+            <h1>Urodzinki Jasia :D </h1>
+            <div id="timer1"></div>
+        </section>
+        <section>
             <h1>Matura 2022 :) </h1>
-            <div id="timer"></div>
+            <div id="timer2"></div>
         </section>
     </main>
 
@@ -40,8 +44,8 @@
 
             howManyDaysFromNow()
             {
-                let now = new Date().getTime();
-                let miliseconds = this.timeInMiliseconds - now;
+                let timeNowInMiliseconds = new Date().getTime();
+                let miliseconds = this.timeInMiliseconds - timeNowInMiliseconds;
                 let days = miliseconds / 86400000;
                 return days;
             }
@@ -75,13 +79,33 @@
         }
 
         function playTimer() {
+
+            daysToBirthdayJas = birthdayJasTime.showTimeLeft();
+            document.getElementById("timer1").innerHTML = daysToBirthdayJas;
+
             daysToMatura = maturaTime.showTimeLeft();
-            document.getElementById("timer").innerHTML = daysToMatura;
+            document.getElementById("timer2").innerHTML = daysToMatura;
+
             setTimeout("playTimer()", 1000);
         }
 
+        var now = new Date();
+        var today = new Time(now);
+
         let matura_2022_05_04 = new Date(2022, 04, 04, 9);
         let maturaTime = new Time(matura_2022_05_04);
+
+        let jasYearOfBirthday = today.year;
+        if (today.month > 04) {
+            jasYearOfBirthday = today.year + 1;
+        }
+
+        if (today.month == 4 && today.day >= 29 ) {
+            jasYearOfBirthday = today.year + 1;
+        }
+
+        let birthdayJas = new Date(jasYearOfBirthday, 04, 29);
+        let birthdayJasTime = new Time(birthdayJas);
 
         playTimer();
         
