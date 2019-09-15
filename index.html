@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+
+<html lang="pl">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Matura tuż tuż</title>
+    <meta name="description" content="how many days until the final exams 'matura'">
+    <meta name="author" content="Mariusz Najwer">
+
+    <!-- <link rel="stylesheet" href="css/styles.css?v=1.0"> -->
+
+</head>
+
+<body>
+    
+
+    <main>
+        <section>
+            <h1>Matura 2026 :) </h1>
+            <div id="timer"></div>
+        </section>
+    </main>
+
+    <script>
+        class Time {
+            constructor (time) {
+                this.day = time.getDate();
+                this.month = time.getMonth();
+                this.year = time.getFullYear();
+                this.hour = time.getHours(); //current time zone
+                this.hourUTC = time.getUTCHours(); // London time zone
+                this.minutes = time.getMinutes();
+                this.seconds = time.getSeconds();
+                this.miliseconds = time.getMilliseconds();
+                this.offset = time.getTimezoneOffset();
+                this.timeInMiliseconds = time.getTime();
+            }
+
+            howManyDaysFromNow()
+            {
+                let now = new Date().getTime();
+                let miliseconds = this.timeInMiliseconds - now;
+                let days = miliseconds / 86400000;
+                return days;
+            }
+
+            howManyHoursFromNow() {
+                let days = this.howManyDaysFromNow();
+                let hours = (days - Math.floor(days))*24;
+                return hours;
+            }
+
+            howManyMinsFromNow() {
+                let hours = this.howManyHoursFromNow();
+                let mins = (hours - Math.floor(hours)) * 60;
+                return mins;
+            }
+
+            howManySecondsFromNow() {
+                let mins = this.howManyMinsFromNow();
+                let seconds = (mins - Math.floor(mins)) * 60;
+                return seconds;
+            }
+
+            showTimeLeft(){
+                let days = Math.floor(this.howManyDaysFromNow());
+                let hours = Math.floor(this.howManyHoursFromNow());
+                let mins = Math.floor(this.howManyMinsFromNow());
+                let seconds = Math.floor(this.howManySecondsFromNow());
+                let timeLeft = "<p>"+days + " dni " + hours + " godzin " + mins + " minut " + seconds + " sekund</p>";
+                return timeLeft;
+            }
+        }
+
+        function playTimer() {
+            daysToMatura = maturaTime.showTimeLeft();
+            document.getElementById("timer").innerHTML = daysToMatura;
+            setTimeout("playTimer()", 1000);
+        }
+
+        let matura_2026_05_04 = new Date(2026, 04, 04, 9);
+        let maturaTime = new Time(matura_2026_05_04);
+
+        playTimer();
+        
+        // var id = window.setTimeout(function () { }, 0);
+        // while (id--) {
+        //     window.clearTimeout(id);
+        // }
+            
+       
+       
+        
+    </script>
+
+</body>
+
+</html>
