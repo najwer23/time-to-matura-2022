@@ -86,7 +86,7 @@
             daysToMatura = maturaTime.showTimeLeft();
             document.getElementById("timer2").innerHTML = daysToMatura;
 
-            setTimeout("playTimer()", 1000);
+            setTimeout(playTimer, 1000);
         }
 
         var now = new Date();
